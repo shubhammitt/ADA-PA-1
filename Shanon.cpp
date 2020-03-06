@@ -53,10 +53,10 @@ int main()
 	for( int i = 0 ; i < s.size() ; i++ )
 		frequency[s[i]]++;
 
-	fre_char.push_back({0,0});//to make 1 index
+	fre_char.push_back({0,0}); // to make 1 index
 	for( int i = 0 ; i < max_char ; i++ )
 	{
-		if(frequency[i]!=0)
+		if(frequency[i] != 0)
 			fre_char.push_back({frequency[i],i});
 	}
 
