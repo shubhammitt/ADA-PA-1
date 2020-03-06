@@ -8,7 +8,7 @@ int main()
 	mapping.open( "mapping.txt" );
 	encoded.open( "encoded.txt" );
 	char ch ; string pre_code ;
-	map < string , char > character_map;
+	map < string , char > character_map; // store mappings of ASCII characters
 	while( mapping >> ch >> pre_code )
 	{
 		character_map[pre_code] = ch;
@@ -16,7 +16,6 @@ int main()
 	string in;
 	getline(encoded,in);
 	string s;
-	cout << in.size();
 	for( int i = 0 ; i < in.size() ; i++ )
 	{
 		s = s + in[i];
