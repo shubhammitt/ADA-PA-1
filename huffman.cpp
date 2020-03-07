@@ -12,36 +12,44 @@ struct node{
 	struct node* left;
 	struct node* right;
 
-	node(char my_c, int my_fq){
-		c = my_c;
-		fq = my_fq;
-		left = NULL;
-		right = NULL;
-	}
+	// node(char my_c, int my_fq){
+	// 	c = my_c;
+	// 	fq = my_fq;
+	// 	left = NULL;
+	// 	right = NULL;
+	// }
 
-	node(struct node* l, struct node* r){
-		fq = l->fq + r->fq;
-		c = 0;
-		left = l;
-		right = r;
-	}
+	// node(struct node* l, struct node* r){
+	// 	fq = l->fq + r->fq;
+	// 	c = 0;
+	// 	left = l;
+	// 	right = r;
+	// }
 };
 
 struct cmp{
-	bool operator()(node a, node b){
-		return a.fq <= b.fq;
+	bool operator()(struct node* a, struct node* b){
+		return a->fq <= b->fq;
 	}
 };
 
-priority_queue<node, vector<node>, cmp> q;
+struct node* getNode(int ch, int freq, struct node* l, struct node* r){
+	struct node* nd = new node();
+	nd->c = ch;
+	nd->fq = freq;
+	nd->left = l;
+	nd->right = r;
+}
 
-void make_mapping(struct node nd, string code){
-	if(nd.c != 0){
-		prefix_code[nd.c] = code;
+priority_queue<struct node*, vector<struct node*>, cmp> q;
+
+void make_mapping(struct node* nd, string code){
+	if(nd->c != '\0'){
+		prefix_code[nd->c] = code;
  	}
  	else{
- 		make_mapping(*(nd.left), code + "0");
-		make_mapping(*(nd.right), code + "1");	
+ 		make_mapping(nd->left, code + "0");
+		make_mapping(nd->right, code + "1");	
  	}
 }
 
@@ -59,19 +67,19 @@ int main()
 	for( int i = 0 ; i < max_char ; i++ )
 	{
 		if(frequency[i] != 0)
-			q.push(node(i, frequency[i]));
+			q.push(getNode(i, frequency[i], nullptr, nullptr));
 	}
 
 	while(q.size() > 1){
-		struct node left = q.top();
+		struct node* left = q.top();
 		q.pop();
-		struct node right = q.top();
+		struct node* right = q.top();
 		q.pop();
-		struct node combined = node(&left, &right);
+		struct node* combined = getNode('\0', left->fq + right->fq, left, right);
 		q.push(combined);
 	}
 
-	struct node nd = q.top(); q.pop();
+	struct node* nd = q.top(); q.pop();
 	make_mapping(nd, "");
 
 	for( int i = 0 ; i < max_char ; i++ )
