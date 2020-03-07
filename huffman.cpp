@@ -29,7 +29,7 @@ struct node{
 
 struct cmp{
 	bool operator()(struct node* a, struct node* b){
-		return a->fq <= b->fq;
+		return a->fq >= b->fq;
 	}
 };
 
