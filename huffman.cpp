@@ -11,20 +11,6 @@ struct node{
 	char c;
 	struct node* left;
 	struct node* right;
-
-	// node(char my_c, int my_fq){
-	// 	c = my_c;
-	// 	fq = my_fq;
-	// 	left = NULL;
-	// 	right = NULL;
-	// }
-
-	// node(struct node* l, struct node* r){
-	// 	fq = l->fq + r->fq;
-	// 	c = 0;
-	// 	left = l;
-	// 	right = r;
-	// }
 };
 
 struct cmp{

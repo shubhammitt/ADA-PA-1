@@ -11,7 +11,6 @@ string prefix_code[max_char] = { }; // store mapping for each character
 int find_partition( int l , int r )
 {
 	int opt = l;
-	int n = fre_char.size() - 1;
 	if( l == r )
 		return opt;
 	int opt_set_dif = fre_char[opt].first - ( prefix_sum[r] - prefix_sum[opt] );
@@ -29,16 +28,14 @@ int find_partition( int l , int r )
 
 void make_mapping( int l , int r )
 {
-	if( l <= r )
+	if( l < r )
 	{
 		int m = find_partition(l , r);
 		for( int i = l ; i <= m ; i++)
 			prefix_code[fre_char[i].second] += "0";
 		for( int i = m + 1 ; i <= r ; i++)
 			prefix_code[fre_char[i].second] += "1";
-		if( l != m )
 		make_mapping( l , m );
-		if( m + 1 != r )
 		make_mapping( m + 1 , r );
 	}
 }
