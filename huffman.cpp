@@ -35,13 +35,13 @@ struct cmp{
 
 priority_queue<node, vector<node>, cmp> q;
 
-void make_mapping(struct node* nd, string code){
-	if(nd->c != 0){
-		prefix_code[nd->c] = code;
+void make_mapping(struct node nd, string code){
+	if(nd.c != 0){
+		prefix_code[nd.c] = code;
  	}
  	else{
- 		make_mapping(nd->left, code + "0");
-		make_mapping(nd->right, code + "1");	
+ 		make_mapping(*(nd.left), code + "0");
+		make_mapping(*(nd.right), code + "1");	
  	}
 }
 
@@ -72,7 +72,7 @@ int main()
 	}
 
 	struct node nd = q.top(); q.pop();
-	make_mapping(&nd, "");
+	make_mapping(nd, "");
 
 	for( int i = 0 ; i < max_char ; i++ )
 	{
