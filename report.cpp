@@ -19,7 +19,7 @@ void store_mapping()
 	string l;
 	while( getline(mapping , l) )
 	{
-		prefix_code[l[0]]=l.substr(2,l.size());
+		prefix_code[l[0]] = l.substr(2, l.size());
 	}
 	mapping.close();
 }
@@ -27,10 +27,10 @@ int analyse()
 {
 	store_mapping();
 	int access_time = 0;
-	for(int i=0;i<max_char;i++)
+	for( int i = 0 ; i < max_char ; i++ )
 	{
-		access_time += frequency[i]*prefix_code[i].size();
-		prefix_code[i]="";
+		access_time += frequency[i] * prefix_code[i].size();
+		prefix_code[i] = ""; //resetting
 	}
 	return access_time;
 }
@@ -43,8 +43,9 @@ int main ()
 	system("make Shanon");
 	int Shanon_access_time = analyse();
 
-	cout<<"Huffman access time = "<<huffman_access_time<<"\n";
-	cout<<"Shanon access time  = "<<Shanon_access_time<<"\n";
-
+	cout << "\033[0;32m" << "Huffman access time = " << huffman_access_time << "\n";
+	cout << "Shanon access time  = " << Shanon_access_time << "\n";
+	cout << "Difference = " << Shanon_access_time - huffman_access_time <<"\033[0m\n";
+	system("make clean");
 	return 0; 
 }
