@@ -33,22 +33,16 @@ struct cmp{
 	}
 };
 
-// bool cmp(struct node a, struct node b){
-// 	if(a.fq <= b.fq)
-// 		return true;
-// 	return false;
-// }
-
 priority_queue<node, vector<node>, cmp> q;
 
 void make_mapping(struct node* nd, string code){
-	cout << nd->c << "\n";
-	if(nd->left == NULL){
+	if(nd->c != 0){
 		prefix_code[nd->c] = code;
-		cout << nd->c << " " << code << "\n";
  	}
-	make_mapping(nd->left, code + "0");
-	make_mapping(nd->right, code + "1");
+ 	else{
+ 		make_mapping(nd->left, code + "0");
+		make_mapping(nd->right, code + "1");	
+ 	}
 }
 
 int main()
@@ -75,7 +69,6 @@ int main()
 		q.pop();
 		struct node combined = node(&left, &right);
 		q.push(combined);
-		// cout << "combined " << left.c << " " << right.c << "\n";
 	}
 
 	struct node nd = q.top(); q.pop();
