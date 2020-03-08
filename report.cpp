@@ -23,25 +23,27 @@ void store_mapping()
 	}
 	mapping.close();
 }
-int analyse()
+long double analyse()
 {
 	store_mapping();
 	int access_time = 0;
+	int sumfreq = 0;
 	for( int i = 0 ; i < max_char ; i++ )
-	{
+	{	
+		sumfreq += frequency[i];
 		access_time += frequency[i] * prefix_code[i].size();
 		prefix_code[i] = ""; //resetting
 	}
-	return access_time;
+	return (long double) access_time / (long double) sumfreq;
 }
 int main () 
 {
 	count_frequency();
 	system("make huffman");
-	int huffman_access_time = analyse();
+	long double huffman_access_time = analyse();
 
 	system("make Shanon");
-	int Shanon_access_time = analyse();
+	long double Shanon_access_time = analyse();
 
 	cout << "\033[0;32m" << "Huffman access time = " << huffman_access_time << "\n";
 	cout << "Shanon access time  = " << Shanon_access_time << "\n";
